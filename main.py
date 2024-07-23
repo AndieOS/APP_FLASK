@@ -9,10 +9,10 @@ import plotly.graph_objects as go
 import numpy as np
 
 db_config = {
-    'host': 'viaduct.proxy.rlwy.net',         
-    'port': '14068',
+    'host': ' roundhouse.proxy.rlwy.net',         
+    'port': '14710',
     'user': 'root',        
-    'password': 'aStJTSBCwvJLQaVbnzlHFOvdAJObLymB', 
+    'password': 'ZvulfgacDrHrzwoGqOIEcoossaCHrxCF', 
     'database': 'railway'
 }
 
