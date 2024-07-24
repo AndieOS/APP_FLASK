@@ -9,10 +9,10 @@ import plotly.graph_objects as go
 import numpy as np
 
 db_config = {
-    'host': 'roundhouse.proxy.rlwy.net',
+    'host': 'roundhouse.proxy.rlwy.net',         
     'port': '14710',
-    'user': 'root',
-    'password': 'ZvulfgacDrHrzwoGqOIEcoossaCHrxCF',
+    'user': 'root',        
+    'password': 'ZvulfgacDrHrzwoGqOIEcoossaCHrxCF', 
     'database': 'railway'
 }
 
@@ -57,44 +57,48 @@ app.layout = html.Div([
                 }
             ),
             html.Br(),
-            html.B("Seleccionar habitación:"),
+            html.B("Selecciona: "), 
             dcc.Dropdown(
                 id='room-selection',
                 options=[
-                    {'label': 'Cuarto 1', 'value': 'cuarto1'},
-                    {'label': 'Cuarto 2', 'value': 'cuarto2'}
+                    {'label': 'Supervisión', 'value': 'emetereologicas'},
+                    {'label': 'Histórico', 'value': 'emetereologicas'},
+                    {'label': 'Análisis', 'value': 'emetereologicas'},                 
                 ],
-                value='cuarto1'
+                value='emetereologicas',
+                clearable=False,
+                style={'width': '300px', 'marginBottom': 10, 'fontSize': 16}
             ),
-            html.Br(),
-            html.B("Seleccionar rango de fechas:"),
+            html.Div(html.B("Seleccione Fecha: "), style={'display': 'inline-block', 'marginRight': '10px'}),
             dcc.DatePickerRange(
                 id='date-picker-range',
-                start_date=datetime(2023, 1, 1),
-                end_date=datetime.now()
+                start_date=datetime(2023, 7, 1),
+                end_date=datetime(2023, 7, 7),
+                display_format='YYYY-MM-DD',
+                style={'marginBottom': 10}
             ),
-            html.Br(),
-            html.Button('Actualizar', id='update-button', n_clicks=0),
-            dcc.Graph(id='temperature-graph'),
-            dcc.Graph(id='histogram-graph'),
         ],
         style={
-            'background-color': '#222',  # Cambia el fondo de pantalla a gris oscuro
-            'color': 'white',  # Cambia el color del texto a blanco para mejor contraste
-            'padding': '20px'
+            'marginBottom': 30,
+            'padding': '10px',
+            'border-radius': '5px',
         }
-    )
+    ),
+    html.Div([
+        dcc.Graph(id='temperature-graph', style={'width': '50%', 'display': 'inline-block'}),
+        dcc.Graph(id='histogram-graph', style={'width': '50%', 'display': 'inline-block'})
+    ]),
+
 ])
 
 @app.callback(
     [Output('temperature-graph', 'figure'),
      Output('histogram-graph', 'figure')],
-    [Input('update-button', 'n_clicks')],
-    [State('room-selection', 'value'),
-     State('date-picker-range', 'start_date'),
-     State('date-picker-range', 'end_date')]
+    [Input('room-selection', 'value'),
+     Input('date-picker-range', 'start_date'),
+     Input('date-picker-range', 'end_date')]
 )
-def update_graph(n_clicks, selected_room, start_date, end_date):
+def update_graph(selected_room, start_date, end_date):
     dates, temperatures = get_temperature_data(selected_room, start_date, end_date)
     fig_temperature = go.Figure()
     point_colors = ['red' if temp > -12 else 'blue' for temp in temperatures]
