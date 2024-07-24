@@ -41,7 +41,7 @@ app.layout = html.Div([
                 [
                     html.Img(src="/assets/Nova.PNG", style={'width': '200px', 'height': '50px'}),
                     html.H1("Cuartos Fríos", style={
-                        'color': 'white',
+                        'color': 'dimgray',
                         'display': 'inline-block',
                         'vertical-align': 'middle',
                         'margin': '0 20px',
@@ -61,14 +61,9 @@ app.layout = html.Div([
             dcc.Dropdown(
                 id='room-selection',
                 options=[
-                    {'label': 'Cuarto Frío 1 Central', 'value': 'emetereologicas'},
-                    {'label': 'Cuarto Frío 1 Evaporador 1', 'value': 'tempc1ev1'},
-                    {'label': 'Cuarto Frío 1 Evaporador 2', 'value': 'tempc1ev2'},
-                    {'label': 'Cuarto Frío 2 Central', 'value': 'tempc2'},                    
-                    {'label': 'Cuarto Frío 2 Evaporador 1', 'value': 'tempc2ev1'},
-                    {'label': 'Cuarto Frío 2 Evaporador 2', 'value': 'tempc2ev2'},
-                    {'label': 'Cuarto Frío 2 Evaporador 3', 'value': 'tempc2ev3'},
-                    {'label': 'Cuarto Frío 3 Central', 'value': 'tempc3'}
+                    {'label': 'Supervisión', 'value': 'emetereologicas'},
+                    {'label': 'Histórico', 'value': 'emetereologicas'},
+                    {'label': 'Análisis', 'value': 'emetereologicas'},                 
                 ],
                 value='emetereologicas',
                 clearable=False,
