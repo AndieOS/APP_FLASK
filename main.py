@@ -41,14 +41,14 @@ app.layout = html.Div([
                 [
                     html.Img(src="/assets/Nova.PNG", style={'width': '200px', 'height': '50px'}),
                     html.H1("Cuartos Fríos", style={
-                        'color': 'dimgray',
+                        'color': 'white',
                         'display': 'inline-block',
                         'vertical-align': 'middle',
                         'margin': '0 20px',
                     }),
                 ],
                 style={
-                    'background-color': 'rgb(0, 141, 34)',
+                    'background-color': 'rgb(105, 105, 105)',
                     'padding': '20px',
                     'border': '3px solid green',
                     'border-radius': '5px',
