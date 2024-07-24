@@ -48,7 +48,7 @@ app.layout = html.Div([
                     }),
                 ],
                 style={
-                    'background-color': 'rgb(105, 105, 105)',
+                    'background-color': 'rgb(0, 141, 34)',
                     'padding': '20px',
                     'border': '3px solid green',
                     'border-radius': '5px',
@@ -57,7 +57,7 @@ app.layout = html.Div([
                 }
             ),
             html.Br(),
-            html.B("Selecciona Cuarto: "), 
+            html.B("Selecciona: "), 
             dcc.Dropdown(
                 id='room-selection',
                 options=[
@@ -88,6 +88,11 @@ app.layout = html.Div([
         dcc.Graph(id='temperature-graph', style={'width': '50%', 'display': 'inline-block'}),
         dcc.Graph(id='histogram-graph', style={'width': '50%', 'display': 'inline-block'})
     ]),
+    style={
+            'background-color': '#222',  # Cambia el fondo de pantalla a gris oscuro
+            'color': 'white',  # Cambia el color del texto a blanco para mejor contraste
+            'padding': '20px'
+        }
 ])
 
 @app.callback(
