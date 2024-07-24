@@ -34,62 +34,75 @@ server = Flask(__name__)
 
 app = dash.Dash(__name__, server=server, url_base_pathname='/dashboard/')
 
-app.layout = html.Div([
-    html.Div(
-        [
-            html.Div(
-                [
-                    html.Img(src="/assets/Nova.PNG", style={'width': '200px', 'height': '50px'}),
-                    html.H1("Estación Metereológica", style={
-                        'color': 'white',
-                        'display': 'inline-block',
-                        'vertical-align': 'middle',
-                        'margin': '0 20px',
-                    }),
-                ],
-                style={
-                    'background-color': 'rgb(0, 141, 34)',
-                    'padding': '20px',
-                    'border': '3px solid green',
-                    'border-radius': '5px',
-                    'display': 'flex',
-                    'align-items': 'center',
-                }
-            ),
-            html.Br(),
-            html.B("Selecciona: "), 
-            dcc.Dropdown(
-                id='room-selection',
-                options=[
-                    {'label': 'Supervisión', 'value': 'emetereologicas'},
-                    {'label': 'Histórico', 'value': 'emetereologicas'},
-                    {'label': 'Análisis', 'value': 'emetereologicas'},                 
-                ],
-                value='emetereologicas',
-                clearable=False,
-                style={'width': '300px', 'marginBottom': 10, 'fontSize': 16}
-            ),
-            html.Div(html.B("Seleccione Fecha: "), style={'display': 'inline-block', 'marginRight': '10px'}),
-            dcc.DatePickerRange(
-                id='date-picker-range',
-                start_date=datetime(2023, 7, 1),
-                end_date=datetime(2023, 7, 7),
-                display_format='YYYY-MM-DD',
-                style={'marginBottom': 10}
-            ),
-        ],
-        style={
-            'marginBottom': 30,
-            'padding': '10px',
-            'border-radius': '5px',
-        }
-    ),
-    html.Div([
-        dcc.Graph(id='temperature-graph', style={'width': '50%', 'display': 'inline-block'}),
-        dcc.Graph(id='histogram-graph', style={'width': '50%', 'display': 'inline-block'})
-    ]),
-
-])
+app.layout = html.Div(
+    style={'backgroundColor': '#333', 'color': 'white', 'height': '100vh', 'padding': '20px'},
+    children=[
+        html.Div(
+            [
+                html.Div(
+                    [
+                        html.Img(src="/assets/Nova.PNG", style={'width': '200px', 'height': '50px'}),
+                        html.H1("Estación Metereológica", style={
+                            'color': 'white',
+                            'display': 'inline-block',
+                            'vertical-align': 'middle',
+                            'margin': '0 20px',
+                        }),
+                    ],
+                    style={
+                        'background-color': 'rgb(0, 141, 34)',
+                        'padding': '20px',
+                        'border': '3px solid green',
+                        'border-radius': '5px',
+                        'display': 'flex',
+                        'align-items': 'center',
+                    }
+                ),
+                html.Br(),
+                html.Div(
+                    [
+                        html.Label('Seleccione la habitación:', style={'color': 'white'}),
+                        dcc.Dropdown(
+                            id='room-selection',
+                            options=[
+                                {'label': 'Habitación 1', 'value': 'Habitacion1'},
+                                {'label': 'Habitación 2', 'value': 'Habitacion2'},
+                            ],
+                            value='Habitacion1'
+                        ),
+                    ],
+                    style={'margin-bottom': '20px'}
+                ),
+                html.Div(
+                    [
+                        html.Label('Seleccione el rango de fechas:', style={'color': 'white'}),
+                        dcc.DatePickerRange(
+                            id='date-picker-range',
+                            start_date=datetime(2023, 1, 1),
+                            end_date=datetime(2023, 12, 31),
+                            display_format='YYYY-MM-DD',
+                            style={'backgroundColor': '#333', 'color': 'white'}
+                        ),
+                    ],
+                    style={'margin-bottom': '20px'}
+                ),
+                dcc.Graph(id='temperature-graph'),
+                dcc.Graph(id='histogram-graph'),
+                dcc.Interval(
+                    id='interval-component',
+                    interval=60 * 1000,  # in milliseconds
+                    n_intervals=0
+                )
+            ],
+            style={
+                'backgroundColor': '#444',
+                'padding': '20px',
+                'border': '1px solid #444',
+                'border-radius': '5px'
+            }
+        )
+    ]
+)
 
 @app.callback(
     [Output('temperature-graph', 'figure'),
