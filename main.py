@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+<from flask import Flask, render_template
 import dash
 from dash import dcc
 from dash import html
@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 import numpy as np
 
 db_config = {
-    'host': ' roundhouse.proxy.rlwy.net',         
+    'host': 'roundhouse.proxy.rlwy.net',         
     'port': '14710',
     'user': 'root',        
     'password': 'ZvulfgacDrHrzwoGqOIEcoossaCHrxCF', 
@@ -40,7 +40,7 @@ app.layout = html.Div([
             html.Div(
                 [
                     html.Img(src="/assets/Nova.PNG", style={'width': '200px', 'height': '50px'}),
-                    html.H1("Cuartos Fríos", style={
+                    html.H1("Estación Metereológica", style={
                         'color': 'white',
                         'display': 'inline-block',
                         'vertical-align': 'middle',
